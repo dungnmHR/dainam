@@ -27,7 +27,7 @@ Thêm mới đối tác
 		<strong>{{session('error-doitac')}}</strong>
 	</div>
 @endif
-@if(session('success-cat'))
+@if(session('success-doitac'))
 	<div class="alert alert-success">
 		<strong>{{session('success-doitac')}}</strong>
 	</div>
@@ -45,7 +45,9 @@ Thêm mới đối tác
     <div class="card-body bg-light">
         <div class="row">
             <div class="col-4">
-                <form>
+                <form id="form" class="form-horizontal" role="form" action="{{route('doitac.store')}}" 
+                enctype="multipart/form-data" method="POST">
+                @csrf
                     <div class="form-group">
 	                      <label for="name">Tên đối tác</label>
 	                      <input class="form-control" name="name" id="name" type="text" placeholder="Nguyễn Văn A">
@@ -69,8 +71,7 @@ Thêm mới đối tác
                 	</div>
                 </form>
             </div>
-        </div>
-  
+        </div> 
     </div>
 </div>
 <!-- END FORM -->

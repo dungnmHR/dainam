@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DoitacRequest as DoitacRequest;
+use App\Admin\Doitac;
+use Session;
 
 class DoitacController extends Controller
 {
@@ -15,7 +18,8 @@ class DoitacController extends Controller
     public function index()
     {
         //
-        return view('admin.doitac.list');
+        $_doitacs = Doitac::all();
+        return view('admin.doitac.list', ['doitacs' => $_doitacs]);
     }
 
     /**
@@ -35,9 +39,12 @@ class DoitacController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DoitacRequest $request)
     {
         //
+        Doitac::create($request->all());
+        Session::flash('success-doitac', 'Tạo mới đối tác '.$request->name.' thành công.');
+        return redirect(route('doitac.create'));
     }
 
     /**
@@ -60,7 +67,13 @@ class DoitacController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.doitac.edit');
+        $_doitac = Doitac::find($id);
+        if (!isset($_doitac)){
+            Session::flash('error-doitac', 'Không tìm thấy đối tác cần sửa.');
+            return redirect(route('doitac.index'));
+        }
+
+        return view('admin.doitac.edit', ['doitac' => $_doitac]);
     }
 
     /**
@@ -73,6 +86,14 @@ class DoitacController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $_doitac = Doitac::find($id);
+        if (!isset($_doitac)){
+            Session::flash('error-doitac', 'Không tìm thấy đối tác cần sửa.');
+            return redirect(route('doitac.index'));
+        }
+        $_doitac->update($request->all());
+        Session::flash('success-doitac', 'Thay đổi thông tin thành công.');
+        return redirect(route('doitac.edit', ['id' => $id]));
     }
 
     /**
@@ -84,5 +105,14 @@ class DoitacController extends Controller
     public function destroy($id)
     {
         //
+        $_doitac = Doitac::find($id);
+        if (!isset($_doitac)){
+            Session::flash('error-doitac', 'Không tìm thấy đối tác cần sửa.');
+            return redirect(route('doitac.index'));
+        }
+        Session::flash('success-doitac', 'Đã xóa đối tác : '.$_doitac->name. ' khỏi cơ sở dữ liệu.');
+        $_doitac->delete();
+        return redirect(route('doitac.index'));
+
     }
 }

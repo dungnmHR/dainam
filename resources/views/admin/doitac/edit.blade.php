@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('title')
-Thay đổi thông tin đối tác
+Thay đổi thông tin: Đối tác
 @parent
 @stop
 
@@ -15,7 +15,7 @@ Thay đổi thông tin đối tác
   <div class="card-body">
     <div class="row">
       <div class="col-lg-8">
-        <h3 class="mb-0">Thay đổi thông tin đối tác</h3>
+        <h3 class="mb-0">Thay đổi thông tin: Đối tác</h3>
       </div>
     </div>
   </div>
@@ -27,12 +27,11 @@ Thay đổi thông tin đối tác
         <strong>{{session('error-doitac')}}</strong>
     </div>
 @endif
-@if(session('success-cat'))
+@if(session('success-doitac'))
     <div class="alert alert-success">
         <strong>{{session('success-doitac')}}</strong>
     </div>
 @endif
-
 <!-- FORM -->
 <div class="card mb-3">
     <div class="card-header">
@@ -45,22 +44,24 @@ Thay đổi thông tin đối tác
     <div class="card-body bg-light">
         <div class="row">
             <div class="col-4">
-                <form>
+                <form id="form" class="form-horizontal" role="form" method="post" action="{{route('doitac.update',['id'=>$doitac->id])}}">
+                @method('PATCH')
+                @csrf
                     <div class="form-group">
 	                      <label for="name">Tên đối tác</label>
-	                      <input class="form-control" name="name" id="name" type="text" value="Nguyễn Văn A">
+	                      <input class="form-control" name="name" id="name" type="text" value="{{$doitac->name}}" required>
                     </div>
 
                     <div class="form-group">
 	                      <label for="job">Chức vụ</label>
-	                      <input class="form-control" name="job" id="job" type="text" value="Gv Khoa B">
+	                      <input class="form-control" name="job" id="job" type="text" value="{{$doitac->job}}">
                     </div>
 
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status">
-	                        <option value="1">Sử dụng</option>
-	                        <option value="0">Không sử dụng</option>
+	                        <option value="1" {{$doitac->status == '1' ? 'selected' : ''}}>Sử dụng</option>
+	                        <option value="0" {{$doitac->status == '0' ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>
                     </div>
                     <div class="form-group">
