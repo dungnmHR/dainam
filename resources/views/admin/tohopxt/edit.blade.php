@@ -47,6 +47,7 @@ Thay đổi thông tin: Tổ hợp xét tuyển
                 <form id="form" class="form-horizontal" role="form" method="post" action="{{route('tohopxt.update',['id'=>$tohopxt->id])}}">
                 @method('PATCH')
                 @csrf
+                    <input class="form-control" name="_id" id="_id" type="hidden" value="{{$tohopxt->id}}">
                     <div class="form-group">
 	                      <label for="name">Mã</label>
 	                      <input class="form-control" name="code" id="code" type="text" value="{{$tohopxt->code}}" required>
@@ -54,12 +55,12 @@ Thay đổi thông tin: Tổ hợp xét tuyển
 
                     <div class="form-group">
 	                      <label for="job">Nội dung</label>
-	                      <input class="form-control" name="content" id="content" type="text" value="{{$tohopxt->content}}">
+	                      <input class="form-control" name="content" id="content" type="text" value="{{$tohopxt->content}}" required>
                     </div>
 
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
-	                    <select class="form-control" id="status" name="status">
+	                    <select class="form-control" id="status" name="status" required>
 	                        <option value="1" {{$tohopxt->status == '1' ? 'selected' : ''}}>Sử dụng</option>
 	                        <option value="0" {{$tohopxt->status == '0' ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>

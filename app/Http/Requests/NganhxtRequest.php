@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Admin\Tohopxt;
+use App\Admin\Nganhxt;
 
-class TohopxtRequest extends FormRequest
+class NganhxtRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +27,18 @@ class TohopxtRequest extends FormRequest
         if ($this->method() == 'PATCH'){
 
             $id = $this->get('_id');
-            $_thxt = Tohopxt::find($id);
+            $_nxt = Nganhxt::find($id);
             return [
-                'code' => 'required|unique:tohopxts,code,'.$_thxt->id.',id',
+                'code' => 'required|unique:nganhxts,code,'.$_nxt->id.',id',
+                'name'   => 'required',
+                'tohopxt_id'   => 'required',
                 'status'   => 'required',
             ];
         }else{
             return [
-                'code' => 'required|unique:tohopxts',
+                'code' => 'required|unique:nganhxts',
+                'name'   => 'required',
+                'tohopxt_id'   => 'required',
                 'status'   => 'required',
             ];
         }        
@@ -42,6 +46,8 @@ class TohopxtRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'Tên ngành không được để trống.',
+            'tohopxt_id.required' => 'Tổ hợp xét tuyển không được để trống.',
             'code.required' => 'Mã số không được để trống.',
             'code.unique' => 'Mã số  không được trùng.',
             'status.required' => 'Trạng thái không được để trống.',

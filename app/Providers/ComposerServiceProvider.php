@@ -40,6 +40,9 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('admin.tohopxt.*', function ($view) {
             $view->with(['flag'=>'tohopxt', 'url_add_new' => route('tohopxt.create'), 'url_list' => route('tohopxt.index')]);
         });
+        View::composer('admin.nganhxt.*', function ($view) {
+            $view->with(['flag'=>'nganhxt', 'url_add_new' => route('nganhxt.create'), 'url_list' => route('nganhxt.index')]);
+        });
         View::composer('admin.bang-tin', function ($view) {
             $view->with('flag', 'bangtin');
         });

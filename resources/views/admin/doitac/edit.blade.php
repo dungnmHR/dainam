@@ -54,12 +54,12 @@ Thay đổi thông tin: Đối tác
 
                     <div class="form-group">
 	                      <label for="job">Chức vụ</label>
-	                      <input class="form-control" name="job" id="job" type="text" value="{{$doitac->job}}">
+	                      <input class="form-control" name="job" id="job" type="text" value="{{$doitac->job}}" required>
                     </div>
 
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
-	                    <select class="form-control" id="status" name="status">
+	                    <select class="form-control" id="status" name="status" required>
 	                        <option value="1" {{$doitac->status == '1' ? 'selected' : ''}}>Sử dụng</option>
 	                        <option value="0" {{$doitac->status == '0' ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>

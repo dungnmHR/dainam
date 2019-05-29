@@ -50,17 +50,17 @@ Thêm mới đối tác
                 @csrf
                     <div class="form-group">
 	                      <label for="name">Tên đối tác</label>
-	                      <input class="form-control" name="name" id="name" type="text" placeholder="Nguyễn Văn A">
+	                      <input class="form-control" name="name" id="name" type="text" placeholder="Nguyễn Văn A" required>
                     </div>
 
                     <div class="form-group">
 	                      <label for="job">Chức vụ</label>
-	                      <input class="form-control" name="job" id="job" type="text" placeholder="Gv Khoa B">
+	                      <input class="form-control" name="job" id="job" type="text" placeholder="Gv Khoa B" required>
                     </div>
 
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
-	                    <select class="form-control" id="status" name="status">
+	                    <select class="form-control" id="status" name="status" required>
 	                        <option value="1">Sử dụng</option>
 	                        <option value="0">Không sử dụng</option>
 	                     </select>

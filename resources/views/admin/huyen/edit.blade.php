@@ -67,7 +67,7 @@ Thay đổi quận\huyện : {{$huyen->name}}
                     </div>
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
-	                    <select class="form-control" id="status" name="status">
+	                    <select class="form-control" id="status" name="status" required>
 	                        <option value="1" {{$huyen->status == '1' ? 'selected' : ''}}>Sử dụng</option>
 	                        <option value="0" {{$huyen->status == '0' ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>
