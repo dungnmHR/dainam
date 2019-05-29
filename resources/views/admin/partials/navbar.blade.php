@@ -28,7 +28,7 @@
         </div>
       </a>
       <ul class="nav collapse {{$flag == 'doitac' || $flag == 'tinh' 
-                || $flag == 'huyen' || $flag == 'truong'  ? 'show' : ''}}" id="setting-crm">
+                || $flag == 'huyen' || $flag == 'truong' || $flag == 'tohopxt' ? 'show' : ''}}" id="setting-crm">
         <li class="nav-item"><a class="nav-link" href="#">Cấu hình bộ lọc</a>
         </li>
         <li class="nav-item"><a class="nav-link {{$flag == 'doitac' ? 'active' : ''}}" href="{{route('doitac.index')}}">Cấu hình đối tác</a>
@@ -43,6 +43,8 @@
         </li>
         <hr class="border-300 my-2" />       
         <li class="nav-item"><a class="nav-link" href="#">Cấu hình ngành xét tuyển</a>
+        </li>
+        <li class="nav-item {{$flag == 'tohopxt' ? 'active' : ''}}"><a class="nav-link" href="{{route('tohopxt.index')}}">Cấu hình tổ hợp xét tuyển</a>
         </li>
         <li class="nav-item"><a class="nav-link" href="#">Cấu hình loại hình đăng kí cập nhật</a>
         </li>

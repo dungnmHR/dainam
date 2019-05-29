@@ -9,6 +9,7 @@ Route::prefix('admin')->group(function () {
 	Route::post('/huyen/import', '\App\Http\Controllers\Admin\HuyenController@import')->name('huyen-import');
 	Route::resource('truong', '\App\Http\Controllers\Admin\TruongController');
 	Route::post('/truong/import', '\App\Http\Controllers\Admin\TruongController@import')->name('truong-import');
+	Route::resource('tohopxt', '\App\Http\Controllers\Admin\TohopxtController');
 	//Route::resource('tinh', '\App\Http\Controllers\Admin\TinhController');
 
 

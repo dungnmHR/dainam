@@ -107,7 +107,7 @@ class DoitacController extends Controller
         //
         $_doitac = Doitac::find($id);
         if (!isset($_doitac)){
-            Session::flash('error-doitac', 'Không tìm thấy đối tác cần sửa.');
+            Session::flash('error-doitac', 'Không tìm thấy đối tác cần xóa.');
             return redirect(route('doitac.index'));
         }
         Session::flash('success-doitac', 'Đã xóa đối tác : '.$_doitac->name. ' khỏi cơ sở dữ liệu.');
