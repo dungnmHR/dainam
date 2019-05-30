@@ -114,7 +114,7 @@ Học viên chính quy
           <div class="form-group row">
             <label class="col-sm-3 col-form-label col-form-label-sm title-label">Địa chỉ nhà</label>
             <div class="col-sm-9 pd0">
-              <input type="text" class="form-control form-control-sm txt-diachinha" >
+              <input type="text" class="form-control form-control-sm txt-diachinha" id="diachinha" >
             </div>
           </div>
         </div>
@@ -583,13 +583,28 @@ Học viên chính quy
 @stop
 
 @section('js')
-<script type="text/javascript"> 
+<script type="text/javascript">
+var diachi_path = "{{route('get-dia-chi-autocomplete')}}"; 
 var city_path = "{{route('tinh-autocomplete')}}";
 var dis_path = "{{route('huyen-autocomplete')}}";
 var school_path = "{{route('truong-autocomplete')}}"
 var get_code_city = "{{route('get-code-tinh-autocomplete')}}";
 var get_code_district = "{{route('get-code-huyen-autocomplete')}}";
 var get_code_truong = "{{route('get-code-truong-autocomplete')}}";
+$('#diachinha').change(function(){
+  $.get(diachi_path, { query: $(this).val() }, function (data) {
+      $('#city').val(data['city']);
+      $('._district').val(data['district']);
+      $.get(get_code_city, { query: $('#city').val() }, function (data) {
+        $('#city_code').val(data);
+      }); 
+      $.get(get_code_district, { query: $('._district').val() }, function (data) {
+        console.log(data);
+        $('#district_code').val(data);
+      });    
+  
+  });
+});
 
 $('._city').typeahead({
   source:  function (query, process) {

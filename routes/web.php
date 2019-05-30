@@ -11,6 +11,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/get-code-huyen/autocomplete','\App\Http\Controllers\Admin\HuyenController@getCodeHuyen')->name('get-code-huyen-autocomplete');
     Route::get('/search-truong/autocomplete','\App\Http\Controllers\Admin\TruongController@autocomplete')->name('truong-autocomplete');
     Route::get('/get-code-truong/autocomplete','\App\Http\Controllers\Admin\TruongController@getCodeTruong')->name('get-code-truong-autocomplete');
+    Route::get('/get-dia-chi/autocomplete','\App\Http\Controllers\Admin\TinhController@getDiaChi')->name('get-dia-chi-autocomplete');
 	Route::resource('huyen', '\App\Http\Controllers\Admin\HuyenController');
 	Route::post('/huyen/import', '\App\Http\Controllers\Admin\HuyenController@import')->name('huyen-import');
 	Route::resource('truong', '\App\Http\Controllers\Admin\TruongController');

@@ -89,10 +89,7 @@ Học viên cập nhật dược
           <div class="form-group row">
             <label class="col-sm-3 col-form-label col-form-label-sm title-label">Nơi sinh</label>
             <div class="col-sm-9 pd0">
-              <select class="form-control">
-                <option>Bà Rịa - Vũng Tàu</option>
-                <option>Hà Nội</option>
-              </select>
+              <input class="form-control form-control-sm _city" type="text">
             </div>
           </div>
         </div>
@@ -103,7 +100,7 @@ Học viên cập nhật dược
           <div class="form-group row">
             <label class="col-sm-3 col-form-label col-form-label-sm title-label">Địa chỉ</label>
             <div class="col-sm-9 pd0">
-              <input type="text" class="form-control form-control-sm" >
+              <input class="form-control form-control-sm _city" type="text">
             </div>
           </div>
         </div>
@@ -418,5 +415,14 @@ Học viên cập nhật dược
 @stop
 
 @section('js')
-
+<script type="text/javascript">
+var city_path = "{{route('tinh-autocomplete')}}";
+$('._city').typeahead({
+  source:  function (query, process) {
+  return $.get(city_path, { query: query }, function (data) {
+        return process(data);
+        });
+  }
+});  
+</script>
 @endsection

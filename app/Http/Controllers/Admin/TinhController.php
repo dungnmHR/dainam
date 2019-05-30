@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TinhRequest as TinhRequest;
 use App\Admin\Tinh;
+use App\Admin\Huyen;
 use File;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Excel;
@@ -154,5 +155,47 @@ class TinhController extends Controller
         if($tinh != null) $data = $tinh->code;
         else $data = ""; 
         return response()->json($data);
+    }
+
+    public function getDiaChi(Request $request)
+    {
+        $dia_chi = $request->input('query');
+        $_tmp_array = explode(",",mb_strtolower($dia_chi, 'UTF-8'));
+
+        $_city = "";
+        $_district = "";
+        if ($_tmp_array != null && sizeof( $_tmp_array) > 0){
+            $size = sizeof( $_tmp_array);
+            $arr_district = ['quận', 'huyện', 'thị xã'];
+            $arr_city = ['thành phố', 'tỉnh'];           
+            $_tmp_city = $_tmp_array[$size-1];
+            for($i = 0; $i < sizeof($arr_city); $i++){
+                $_tmp_city = str_replace($arr_city[$i], '', $_tmp_city);
+
+            }
+            $_tmp = explode(" ", $_tmp_city);
+            for($j = 0; $j < sizeof($_tmp); $j++){
+                if($j==0) $_tmp_city = $_tmp[$j];
+                else if($j < sizeof($_tmp)-1) $_tmp_city = $_tmp_city.$_tmp[$j]." ";
+                else $_tmp_city = $_tmp_city.$_tmp[$j];
+            }
+            $_city = Tinh::whereRaw('lower(name) like (?)',["%{$_tmp_city}%"])->first();
+            if($size > 1){
+                $_tmp_district = $_tmp_array[$size-2];
+                for($i = 0; $i < sizeof($arr_district); $i++){
+                    $_tmp_district = str_replace($arr_district[$i], '', $_tmp_district);
+                }
+                $_tmp = explode(" ", $_tmp_district);
+                for($j = 0; $j < sizeof($_tmp); $j++){
+                    if($j == 0) $_tmp_district = $_tmp[$j]." ";
+                    else if($j < sizeof($_tmp)-1) $_tmp_district = $_tmp_district.$_tmp[$j]." ";
+                    else $_tmp_district = $_tmp_district.$_tmp[$j];
+                }
+                $_district = Huyen::whereRaw('lower(name) like (?)',["%{$_tmp_district}%"])->first();
+                if($_district != null) $_district = $_district->name;
+            }
+            if($_city != null) $_city = $_city->name;
+        } 
+        return response()->json(array('city' => $_city, 'district' => $_district));
     }
 }
