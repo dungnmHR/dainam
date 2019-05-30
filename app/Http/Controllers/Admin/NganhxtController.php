@@ -44,7 +44,12 @@ class NganhxtController extends Controller
     public function store(NganhxtRequest $request)
     {
         //
-        Nganhxt::create($request->all());
+        $nganhxt = new Nganhxt();
+        $nganhxt->tohopxt_id = implode( ";", $request->tohopxt_id );
+        $nganhxt->code = $request->code;
+        $nganhxt->name = $request->name;
+        $nganhxt->status = $request->status;
+        $nganhxt->save();
         Session::flash('success-nganhxt', 'Tạo mới ngành xét tuyển "'.$request->name.'" thành công.');
         return redirect(route('nganhxt.create'));
     }
@@ -89,12 +94,16 @@ class NganhxtController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $_nganhxt = Nganhxt::find($id);
-        if (!isset($_nganhxt)){
+        $nganhxt = Nganhxt::find($id);
+        if (!isset($nganhxt)){
             Session::flash('error-nganhxt', 'Không tìm thấy ngành xét tuyển cần sửa.');
             return redirect(route('nganhxt.index'));
         }
-        $_nganhxt->update($request->all());
+        $nganhxt->tohopxt_id = implode( ";", $request->tohopxt_id);
+        $nganhxt->code = $request->code;
+        $nganhxt->name = $request->name;
+        $nganhxt->status = $request->status;
+        $nganhxt->update();
         Session::flash('success-nganhxt', 'Thay đổi thông tin thành công.');
         return redirect(route('nganhxt.edit', ['id' => $id]));
     }

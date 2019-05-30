@@ -39,8 +39,12 @@ Danh sách: Ngành xét tuyển
 	@foreach($nganhxts as $nganhxt)
 	<tr>
 		<td>{{$nganhxt->code}}</td>
-		<td>{{$nganhxt->name}}</td>
-		<td>{{$nganhxt->tohopxt->code}}</td>
+		<td>{{$nganhxt->name}}</td>list_tohop
+		<td>
+			@foreach($nganhxt->list_tohop as $key=>$value)
+			<span class="badge badge-pill badge-success">{{$value}}</span>
+			@endforeach
+		</td>
 		<td>
 			@if($nganhxt->status == 1)
 			<span class="badge badge-pill badge-success">Đang sử dụng</span>

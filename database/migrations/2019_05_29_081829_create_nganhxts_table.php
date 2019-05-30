@@ -17,7 +17,7 @@ class CreateNganhxtsTable extends Migration
             $table->bigIncrements('id');
             $table->string('code')->unique();
             $table->string('name');
-            $table->integer('tohopxt_id');
+            $table->string('tohopxt_id');
             $table->boolean('status');
             $table->timestamps();
         });

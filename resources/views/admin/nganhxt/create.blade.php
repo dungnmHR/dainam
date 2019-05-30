@@ -6,7 +6,17 @@ Thêm mới: Ngành xét tuyển
 @stop
 
 @section('css')
-
+<link href="{{asset('backend/pages/assets/css/BsMultiSelect.css')}}" rel="stylesheet">
+<style type="text/css">
+.dashboardcode-bsmultiselect li.badge {
+    background: #eca805;
+    padding: 0 10px !important;
+    margin-right: 2px;
+    padding-top: 4px !important;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #000;
+}
+</style>
 @stop
 
 @section('content')
@@ -58,15 +68,15 @@ Thêm mới: Ngành xét tuyển
 	                      <label for="job">Tên ngành</label>
 	                      <input class="form-control" value="{{old('name')}}" name="name" id="name" type="text" placeholder="Công nghệ thông tin" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="status">Tổ hợp xét tuyển</label>
-                        <select class="form-control" id="tohopxt_id" name="tohopxt_id" required>
+                        <select name="tohopxt_id[]" id="example-s" class="form-control"  multiple="multiple" style="display: none;">
                            @foreach($tohopxts as $tohopxt)
-                           <option value={{$tohopxt->id}} {{old('tohopxt_id') == $tohopxt->id ? 'selected' : ''}}>{{$tohopxt->code}}( {{$tohopxt->content}} )</option>
+                           <option value={{$tohopxt->id}}>{{$tohopxt->code}}( {{$tohopxt->content}} )</option>
                            @endforeach
-                         </select>
+                        </select>
                     </div>
+
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status" required>
@@ -87,4 +97,19 @@ Thêm mới: Ngành xét tuyển
 @stop
 
 @section('js')
-@stop
+<script src="{{asset('backend/pages/assets/js/BsMultiSelect.js')}}"></script>
+<script>
+  $("select[multiple='multiple']").bsMultiSelect({
+              selectedPanelDefMinHeight: 'calc(2.25rem + 2px)',  // default size
+              selectedPanelLgMinHeight: 'calc(2.875rem + 2px)',  // LG size
+              selectedPanelSmMinHeight: 'calc(1.8125rem + 2px)', // SM size
+              selectedPanelDisabledBackgroundColor: '#e9ecef',   // disabled background
+              selectedPanelFocusBorderColor: '#80bdff',          // focus border
+              selectedPanelFocusBoxShadow: '0 0 0 0.2rem rgba(0, 123, 255, 0.25)',  // foxus shadow
+              selectedPanelFocusValidBoxShadow: '0 0 0 0.2rem rgba(40, 167, 69, 0.25)',  // valid foxus shadow
+              selectedPanelFocusInvalidBoxShadow: '0 0 0 0.2rem rgba(220, 53, 69, 0.25)',  // invalid foxus shadow
+              inputColor: '#495057', // color of keyboard entered text
+              selectedItemContentDisabledOpacity: '.65' // btn disabled opacity used
+            });
+</script>
+@endsection
