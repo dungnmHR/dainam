@@ -127,8 +127,8 @@ class TinhController extends Controller
             Tinh::truncate();
             $path = $request->file->getRealPath();
             (new FastExcel)->sheet(1)->import($path, function ($line) {
-                $name = $line['name'];
-                $code = $line['code'];
+                $name = $line['Tỉnh'];
+                $code = $line['Mã Tỉnh'];
                 Tinh::create([
                     'code' => $code,
                     'name' => $name,
@@ -140,5 +140,19 @@ class TinhController extends Controller
             Session::flash('error-tinh', 'File import không phải là file excel.');  
         }
         return redirect(route('tinh.index'));
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $data = Tinh::where('status', 1)->pluck('name')->all();
+        return response()->json($data);
+    }
+    public function getCodeTinh(Request $request)
+    {
+        $name_tinh = $request->input('query');
+        $tinh = Tinh::where('status', 1)->where('name', $name_tinh)->first();
+        if($tinh != null) $data = $tinh->code;
+        else $data = ""; 
+        return response()->json($data);
     }
 }

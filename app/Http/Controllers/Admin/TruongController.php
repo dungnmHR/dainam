@@ -127,12 +127,12 @@ class TruongController extends Controller
         if ($extension == "xlsx" || $extension == "xls" ) {
             Truong::truncate();
             $path = $request->file->getRealPath();
-            (new FastExcel)->sheet(2)->import($path, function ($line) {
+            (new FastExcel)->sheet(1)->import($path, function ($line) {
                 $tinh_id = $line['Mã Tỉnh'];
                 $code = $line['Mã Trường'];
                 $name = $line['Tên Trường'];
-                $address = $line['Địa chỉ'];
-                $type = $line['Khu vực'];
+                $address = $line['Địa Chỉ'];
+                $type = $line['Khu Vực'];
                 Truong::create([
                     'code' => $code,
                     'tinh_id' => $tinh_id,
@@ -147,5 +147,22 @@ class TruongController extends Controller
             Session::flash('error-truong', 'File import không phải là file excel.');  
         }
         return redirect(route('truong.index'));
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $tinh = Tinh::where('status', 1)->where('name', $request->input('query'))->first();
+        if($tinh != null){
+             $data = Truong::where('status', 1)->where('tinh_id', $tinh->code)->pluck('name')->all();   
+        }else $data = [];
+        return response()->json($data);
+    }
+    public function getCodeTruong(Request $request)
+    {
+        $name_truong = $request->input('query');
+        $truong = Truong::where('status', 1)->where('name', $name_truong)->first();
+        if($truong != null) $data = $truong->code;
+        else $data = ""; 
+        return response()->json($data);
     }
 }

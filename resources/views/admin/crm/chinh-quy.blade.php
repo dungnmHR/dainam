@@ -91,10 +91,7 @@ Học viên chính quy
           <div class="form-group row">
             <label class="col-sm-6 col-form-label col-form-label-sm title-label">Nơi sinh</label>
             <div class="col-sm-6 div-sel-noisinh">
-              <select class="txt-noisinh form-control">
-                <option>Bà Rịa - Vũng Tàu</option>
-                <option>Hà Nội</option>
-              </select>
+              <input class="form-control form-control-sm _city" type="text">
             </div>
           </div>
         </div>
@@ -128,11 +125,7 @@ Học viên chính quy
           <div class="form-group row">
             <label class="col-sm-6 col-form-label col-form-label-sm title-label">Tỉnh/T.Phố</label>
             <div class="col-sm-6 div-sel-tinhtp">
-              <select class="txt-tinhtp form-control">
-                <option>Hà Nội</option>
-                <option>Thanh Hóa</option>
-                <option>Thái Nguyên</option>
-              </select>
+              <input class="form-control form-control-sm _city" id="city" type="text">
             </div>
           </div>
         </div>
@@ -142,11 +135,7 @@ Học viên chính quy
               <div class="form-group row">
                 <label class="col-sm-7 col-form-label col-form-label-sm title-label">Mã Tỉnh</label>
                 <div class="col-sm-5 div-sel-matinh pd00">
-                  <select class="txt-matinh form-control">
-                    <option>36</option>
-                    <option>37</option>
-                    <option>38</option>
-                  </select>
+                <input class="form-control form-control-sm " id="city_code" disabled type="text">
                 </div>
               </div>
             </div>
@@ -154,11 +143,7 @@ Học viên chính quy
               <div class="form-group row">
                 <label class="col-sm-6 col-form-label col-form-label-sm title-label txt-mahuyen">Mã Huyện</label>
                 <div class="col-sm-6 div-sel-mahuyen pd00 pdr">
-                  <select class="cb-mahuyen form-control">
-                    <option>20</option>
-                    <option>21</option>
-                    <option>22</option>
-                  </select>
+                  <input class="form-control form-control-sm " id="district_code" disabled type="text">
                 </div>
               </div>
             </div>
@@ -171,11 +156,7 @@ Học viên chính quy
           <div class="form-group row">
             <label class="col-sm-6 col-form-label col-form-label-sm title-label">Huyện/Quận</label>
             <div class="col-sm-6 div-sel-huyenquan">
-              <select class="txt-quanhuyen form-control">
-                <option>Thọ Xuân</option>
-                <option>Nông Cống</option>
-                <option>Như Thanh</option>
-              </select>
+              <input class="form-control form-control-sm _district" id="district" type="text">
             </div>
           </div>
         </div>
@@ -414,10 +395,7 @@ Học viên chính quy
         <div class="form-group row">
          <label class="col-sm-6 col-form-label col-form-label-sm title-label ">Trường THPT</label>
          <div class="col-sm-6 div-sel-thpt">
-           <select class="txt-thpt form-control">
-             <option>THPT Lê Hoàn</option>
-             <option>THPT Lê Lợi</option>
-           </select>
+           <input class="form-control form-control-sm _truong" id="truong" type="text">
          </div>
        </div>
      </div>
@@ -425,10 +403,7 @@ Học viên chính quy
       <div class="form-group row">
        <label class="col-sm-6 col-form-label col-form-label-sm title-label ">Mã Trường THPT</label>
        <div class="col-sm-6 div-sel-matruong">
-         <select class="txt-matruong form-control">
-           <option>123456</option>
-           <option>467895</option>
-         </select>
+          <input class="form-control form-control-sm" id="truong_code" disabled type="text">
        </div>
      </div>
    </div>
@@ -608,5 +583,59 @@ Học viên chính quy
 @stop
 
 @section('js')
+<script type="text/javascript"> 
+var city_path = "{{route('tinh-autocomplete')}}";
+var dis_path = "{{route('huyen-autocomplete')}}";
+var school_path = "{{route('truong-autocomplete')}}"
+var get_code_city = "{{route('get-code-tinh-autocomplete')}}";
+var get_code_district = "{{route('get-code-huyen-autocomplete')}}";
+var get_code_truong = "{{route('get-code-truong-autocomplete')}}";
 
+$('._city').typeahead({
+  source:  function (query, process) {
+  return $.get(city_path, { query: query }, function (data) {
+        return process(data);
+        });
+  }
+});
+
+$('._district').typeahead({
+  source:  function (query, process) {
+  return $.get(dis_path, { query : $('#city').val() }, function (data) {
+        return process(data);
+        });
+  }
+});
+
+$('._truong').typeahead({
+  source:  function (query, process) {
+  return $.get(school_path, { query : $('#city').val() }, function (data) {
+        return process(data);
+        });
+  }
+});
+
+$('#city').change(function(){
+  $.get(get_code_city, { query: $(this).val() }, function (data) {
+        $('#city_code').val(data);
+  });
+
+});
+$('#district').change(function(){
+  $.get(get_code_district, { query: $(this).val() }, function (data) {
+        console.log(data);
+        $('#district_code').val(data);
+  });
+
+});
+
+$('#truong').change(function(){
+  $.get(get_code_truong, { query: $(this).val() }, function (data) {
+        console.log(data);
+        $('#truong_code').val(data);
+  });
+
+});  
+</script>
+ 
 @endsection

@@ -17,7 +17,7 @@ class CreateTruongsTable extends Migration
             $table->bigIncrements('id');
             $table->string('code');
             $table->string('name');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->integer('tinh_id');
             $table->string('type');
             $table->boolean('status');

@@ -91,10 +91,7 @@ Học viên liên thông
           <div class="form-group row">
             <label class="col-sm-3 col-form-label col-form-label-sm title-label">Nơi sinh</label>
             <div class="col-sm-9 pd0">
-              <select class="form-control">
-                <option>Bà Rịa - Vũng Tàu</option>
-                <option>Hà Nội</option>
-              </select>
+              <input class="form-control form-control-sm _address" type="text">
             </div>
           </div>
         </div>
@@ -105,7 +102,7 @@ Học viên liên thông
           <div class="form-group row">
             <label class="col-sm-3 col-form-label col-form-label-sm title-label">Địa chỉ</label>
             <div class="col-sm-9 pd0">
-              <input type="text" class="form-control form-control-sm txt-diachi" >
+              <input class="form-control form-control-sm _address" type="text">
             </div>
           </div>
         </div>
@@ -460,6 +457,44 @@ Học viên liên thông
 @stop
 
 @section('js')
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript">
+var path = "{{route('tinh-autocomplete')}}";
+$('._address').typeahead({
+  source:  function (query, process) {
+  return $.get(path, { query: query }, function (data) {
+        return process(data);
+        });
+  }
+});
+
+//     var $input = $("#_address");
+// $input.typeahead({
+//   source: [
+//     {id: "someId1", name: "a"},
+//     {id: "someId1", name: "A"},
+//     {id: "someId1", name: "accc"},
+//     {id: "someId2", name: "b"}
+//   ],
+//   autoSelect: true
+// });
+// $input.change(function() {
+//   var current = $input.typeahead("getActive");
+//   if (current) {
+//     // Some item from your model is active!
+//     if (current.name == $input.val()) {
+//       // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+//     } else {
+//       // This means it is only a partial match, you can either add a new item
+//       // or take the active if you don't want new items
+//     }
+//   } else {
+//     // Nothing is active so it is a new value (or maybe empty value)
+//   }
+// });
+</script>
 
 @endsection

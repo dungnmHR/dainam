@@ -125,9 +125,9 @@ class HuyenController extends Controller
         if ($extension == "xlsx" || $extension == "xls" ) {
             Huyen::truncate();
             $path = $request->file->getRealPath();
-            (new FastExcel)->sheet(3)->import($path, function ($line) {
-                $tinh_id = $line['Mã tỉnh'];
-                $code = $line['Mã huyện'];
+            (new FastExcel)->sheet(2)->import($path, function ($line) {
+                $tinh_id = $line['Mã Tỉnh'];
+                $code = $line['Mã Huyện'];
                 $name = $line['Huyện'];
                 Huyen::create([
                     'code' => $code,
@@ -141,5 +141,23 @@ class HuyenController extends Controller
             Session::flash('error-huyen', 'File import không phải là file excel.');  
         }
         return redirect(route('huyen.index'));
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $tinh = Tinh::where('status', 1)->where('name', $request->input('query'))->first();
+        if($tinh != null){
+             $data = Huyen::where('status', 1)->where('tinh_id', $tinh->code)->pluck('name')->all();   
+        }else $data = [];
+       
+        return response()->json($data);
+    }
+    public function getCodeHuyen(Request $request)
+    {
+        $name_huyen = $request->input('query');
+        $huyen = Huyen::where('status', 1)->where('name', $name_huyen)->first();
+        if($huyen != null) $data = $huyen->code;
+        else $data = ""; 
+        return response()->json($data);
     }
 }

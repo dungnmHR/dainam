@@ -13,4 +13,5 @@
 <script src="{{asset('backend/pages/assets/lib/datatables-bs4/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('backend/pages/assets/lib/datatables.net-responsive/dataTables.responsive.js')}}"></script>
 <script src="{{asset('backend/pages/assets/lib/datatables.net-responsive-bs4/responsive.bootstrap4.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 <script src="{{asset('js/dainam.js')}}"></script>
