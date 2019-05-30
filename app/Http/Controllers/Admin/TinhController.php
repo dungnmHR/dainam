@@ -159,7 +159,7 @@ class TinhController extends Controller
 
     public function getDiaChi(Request $request)
     {
-        $dia_chi = $request->input('query');
+        $dia_chi = "Tổ 5, Thị Trấn Mù Cang Chải, Huyện Mù Cang Chải, yên bái";//$request->input('query');
         $_tmp_array = explode(",",mb_strtolower($dia_chi, 'UTF-8'));
 
         $_city = "";
@@ -167,30 +167,39 @@ class TinhController extends Controller
         if ($_tmp_array != null && sizeof( $_tmp_array) > 0){
             $size = sizeof( $_tmp_array);
             $arr_district = ['quận', 'huyện', 'thị xã'];
-            $arr_city = ['thành phố', 'tỉnh'];           
+            $arr_city = ['thành phố', 'tỉnh'];
+
+
             $_tmp_city = $_tmp_array[$size-1];
             for($i = 0; $i < sizeof($arr_city); $i++){
                 $_tmp_city = str_replace($arr_city[$i], '', $_tmp_city);
 
             }
             $_tmp = explode(" ", $_tmp_city);
-            for($j = 0; $j < sizeof($_tmp); $j++){
-                if($j==0) $_tmp_city = $_tmp[$j];
-                else if($j < sizeof($_tmp)-1) $_tmp_city = $_tmp_city.$_tmp[$j]." ";
-                else $_tmp_city = $_tmp_city.$_tmp[$j];
-            }
+            $index = array_search('',$_tmp);
+            if($index !== FALSE){
+                unset($_tmp[$index]);
+            };
+            $_tmp_city = implode(' ', $_tmp);
+           
+
+
             $_city = Tinh::whereRaw('lower(name) like (?)',["%{$_tmp_city}%"])->first();
             if($size > 1){
+
+
                 $_tmp_district = $_tmp_array[$size-2];
                 for($i = 0; $i < sizeof($arr_district); $i++){
                     $_tmp_district = str_replace($arr_district[$i], '', $_tmp_district);
                 }
                 $_tmp = explode(" ", $_tmp_district);
-                for($j = 0; $j < sizeof($_tmp); $j++){
-                    if($j == 0) $_tmp_district = $_tmp[$j]." ";
-                    else if($j < sizeof($_tmp)-1) $_tmp_district = $_tmp_district.$_tmp[$j]." ";
-                    else $_tmp_district = $_tmp_district.$_tmp[$j];
+                $index = array_search('',$_tmp);
+                if($index !== FALSE){
+                    unset($_tmp[$index]);
                 }
+                $_tmp_district = implode(' ', $_tmp);
+
+
                 $_district = Huyen::whereRaw('lower(name) like (?)',["%{$_tmp_district}%"])->first();
                 if($_district != null) $_district = $_district->name;
             }
