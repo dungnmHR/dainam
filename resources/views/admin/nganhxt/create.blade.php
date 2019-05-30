@@ -22,6 +22,7 @@ Thêm mới: Ngành xét tuyển
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-nganhxt'))
 	<div class="alert alert-danger">
 		<strong>{{session('error-nganhxt')}}</strong>
@@ -50,27 +51,27 @@ Thêm mới: Ngành xét tuyển
                 @csrf
                     <div class="form-group">
 	                      <label for="name">Mã ngành</label>
-	                      <input class="form-control" name="code" id="code" type="text" placeholder="TD1730" required>
+	                      <input class="form-control" value="{{old('code')}}" name="code" id="code" type="text" placeholder="TD1730" required>
                     </div>
 
                     <div class="form-group">
 	                      <label for="job">Tên ngành</label>
-	                      <input class="form-control" name="name" id="name" type="text" placeholder="Công nghệ thông tin" required>
+	                      <input class="form-control" value="{{old('name')}}" name="name" id="name" type="text" placeholder="Công nghệ thông tin" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="status">Tổ hợp xét tuyển</label>
                         <select class="form-control" id="tohopxt_id" name="tohopxt_id" required>
                            @foreach($tohopxts as $tohopxt)
-                           <option value={{$tohopxt->id}}>{{$tohopxt->code}}( {{$tohopxt->content}} )</option>
+                           <option value={{$tohopxt->id}} {{old('tohopxt_id') == $tohopxt->id ? 'selected' : ''}}>{{$tohopxt->code}}( {{$tohopxt->content}} )</option>
                            @endforeach
                          </select>
                     </div>
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status" required>
-	                        <option value="1">Sử dụng</option>
-	                        <option value="0">Không sử dụng</option>
+	                        <option value="1" {{old('status') == 1 ? 'selected' : ''}}>Sử dụng</option>
+	                        <option value="0" {{old('status') == 0 ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>
                     </div>
                     <div class="form-group">

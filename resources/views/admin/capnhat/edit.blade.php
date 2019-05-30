@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('title')
-Thay đổi thông tin: Đối tác
+Thay đổi dữ liệu : {{$capnhat->name}}
 @parent
 @stop
 
@@ -15,7 +15,7 @@ Thay đổi thông tin: Đối tác
   <div class="card-body">
     <div class="row">
       <div class="col-lg-8">
-        <h3 class="mb-0">Thay đổi thông tin: Đối tác</h3>
+        <h3 class="mb-0">Thay đổi dữ liệu : {{$capnhat->name}}</h3>
       </div>
     </div>
   </div>
@@ -23,16 +23,17 @@ Thay đổi thông tin: Đối tác
 
 <!-- MESSAGE PAGE -->
 @include('admin.partials.error-list')
-@if(session('error-doitac'))
+@if(session('error-capnhat'))
     <div class="alert alert-danger">
-        <strong>{{session('error-doitac')}}</strong>
+        <strong>{{session('error-capnhat')}}</strong>
     </div>
 @endif
-@if(session('success-doitac'))
+@if(session('success-capnhat'))
     <div class="alert alert-success">
-        <strong>{{session('success-doitac')}}</strong>
+        <strong>{{session('success-capnhat')}}</strong>
     </div>
 @endif
+
 <!-- FORM -->
 <div class="card mb-3">
     <div class="card-header">
@@ -45,25 +46,20 @@ Thay đổi thông tin: Đối tác
     <div class="card-body bg-light">
         <div class="row">
             <div class="col-4">
-                <form id="form" class="form-horizontal" role="form" method="post" action="{{route('doitac.update',['id'=>$doitac->id])}}">
+                <form id="form" class="form-horizontal" role="form" method="post" action="{{route('capnhat.update',['id'=>$capnhat->id])}}">
                 @method('PATCH')
                 @csrf
+                    <input class="form-control" name="_id" id="_id" type="hidden" value="{{$capnhat->id}}">
                     <div class="form-group">
-	                      <label for="name">Tên đối tác</label>
-	                      <input class="form-control" name="name" id="name" type="text" value="{{$doitac->name}}" required>
-                    </div>
-
+                          <label for="name">Tên</label>
+                          <input class="form-control" value="{{$capnhat->name}}" name="name" id="name" type="text" placeholder="Nhà thuốc"  required>
+                    </div>         
                     <div class="form-group">
-	                      <label for="job">Chức vụ</label>
-	                      <input class="form-control" name="job" id="job" type="text" value="{{$doitac->job}}" required>
-                    </div>
-
-                    <div class="form-group">
-	                    <label for="status">Trạng thái</label>
-	                    <select class="form-control" id="status" name="status" required>
-	                        <option value="1" {{$doitac->status == '1' ? 'selected' : ''}}>Sử dụng</option>
-	                        <option value="0" {{$doitac->status == '0' ? 'selected' : ''}}>Không sử dụng</option>
-	                     </select>
+                        <label for="status">Trạng thái</label>
+                        <select class="form-control" id="status" name="status" required>
+                            <option value="1" {{$capnhat->status == 1 ? 'selected' : ''}}>Sử dụng</option>
+                            <option value="0" {{$capnhat->status == 0 ? 'selected' : ''}}>Không sử dụng</option>
+                         </select>
                     </div>
                     <div class="form-group">
                     <button class="btn btn-primary mb-3" type="submit">Cập nhật</button>

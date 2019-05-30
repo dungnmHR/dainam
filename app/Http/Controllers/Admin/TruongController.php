@@ -47,7 +47,7 @@ class TruongController extends Controller
     {
         //
         Truong::create($request->all());
-        Session::flash('success-truong', 'Tạo mới trường '.$request->name.' thành công.');
+        Session::flash('success-truong', 'Tạo mới trường "'.$request->name.'" thành công.');
         return redirect(route('truong.create'));
     }
 
@@ -115,7 +115,7 @@ class TruongController extends Controller
             Session::flash('error-truong', 'Không tìm thấy trường cần sửa.');
             return redirect(route('truong.index'));
         }
-        Session::flash('success-truong', 'Đã xóa trường : '.$_truong->name. ' khỏi cơ sở dữ liệu.');
+        Session::flash('success-truong', 'Đã xóa trường "'.$_truong->name. '" khỏi cơ sở dữ liệu.');
         $_truong->delete();
         return redirect(route('truong.index'));
     }

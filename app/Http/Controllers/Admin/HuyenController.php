@@ -47,7 +47,7 @@ class HuyenController extends Controller
     {
         //
         Huyen::create($request->all());
-        Session::flash('success-huyen', 'Tạo mới quận\huyện '.$request->name.' thành công.');
+        Session::flash('success-huyen', 'Tạo mới quận\huyện "'.$request->name.'" thành công.');
         return redirect(route('huyen.create'));
     }
 
@@ -115,7 +115,7 @@ class HuyenController extends Controller
             Session::flash('error-huyen', 'Không tìm thấy quận\huyện cần sửa.');
             return redirect(route('huyen.index'));
         }
-        Session::flash('success-huyen', 'Đã xóa quận\huyện : '.$_huyen->name. ' khỏi cơ sở dữ liệu.');
+        Session::flash('success-huyen', 'Đã xóa quận\huyện "'.$_huyen->name. '" khỏi cơ sở dữ liệu.');
         $_huyen->delete();
         return redirect(route('huyen.index'));
     }

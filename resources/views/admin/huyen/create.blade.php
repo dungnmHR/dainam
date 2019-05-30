@@ -22,6 +22,7 @@ Thêm mới : Quận\Huyện
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-huyen'))
 	<div class="alert alert-danger">
 		<strong>{{session('error-huyen')}}</strong>
@@ -55,25 +56,25 @@ Thêm mới : Quận\Huyện
                 @csrf
                     <div class="form-group">
                           <label for="name">Mã quận\huyện</label>
-                          <input class="form-control" name="code" id="code" type="text" placeholder="1"  required>
+                          <input class="form-control" name="code" value="{{old('code')}}" id="code" type="text" placeholder="1"  required>
                     </div>
                     <div class="form-group">
 	                      <label for="name">Tên quận\huyện</label>
-	                      <input class="form-control" name="name" id="name" type="text" placeholder="Ba Đình"  required>
+	                      <input class="form-control" name="name" value="{{old('name')}}" id="name" type="text" placeholder="Ba Đình"  required>
                     </div>
                     <div class="form-group">
                         <label for="status">Tỉnh</label>
                         <select class="form-control" id="tinh_id" name="tinh_id" required>
                            @foreach($tinhs as $tinh)
-                           <option value={{$tinh->id}}>{{$tinh->name}}</option>
+                           <option value={{$tinh->id}} {{old('tinh_id') == $tinh->id ? 'selected' : ''}}>{{$tinh->name}}</option>
                            @endforeach
                          </select>
                     </div>
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status" required>
-	                        <option value="1">Sử dụng</option>
-	                        <option value="0">Không sử dụng</option>
+	                        <option value="1" {{old('status') == 1 ? 'selected' : ''}}>Sử dụng</option>
+	                        <option value="0" {{old('status') == 0 ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>
                     </div>
                     <div class="form-group">

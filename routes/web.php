@@ -11,6 +11,8 @@ Route::prefix('admin')->group(function () {
 	Route::post('/truong/import', '\App\Http\Controllers\Admin\TruongController@import')->name('truong-import');
 	Route::resource('tohopxt', '\App\Http\Controllers\Admin\TohopxtController');
 	Route::resource('nganhxt', '\App\Http\Controllers\Admin\NganhxtController');
+	Route::resource('lienthong', '\App\Http\Controllers\Admin\LienthongController');
+	Route::resource('capnhat', '\App\Http\Controllers\Admin\CapnhatController');
 	//Route::resource('tinh', '\App\Http\Controllers\Admin\TinhController');
 
 

@@ -41,7 +41,7 @@ class TohopxtController extends Controller
     {
         //
         Tohopxt::create($request->all());
-        Session::flash('success-tohopxt', 'Tạo mới tổ hợp xét tuyển '.$request->name.' thành công.');
+        Session::flash('success-tohopxt', 'Tạo mới tổ hợp xét tuyển "'.$request->name.'" thành công.');
         return redirect(route('tohopxt.create'));
     }
 
@@ -108,7 +108,7 @@ class TohopxtController extends Controller
             Session::flash('error-tohopxt', 'Không tìm thấy tổ hợp xét tuyển cần xóa.');
             return redirect(route('tohopxt.index'));
         }
-        Session::flash('success-tohopxt', 'Đã xóa tổ hợp xét tuyển : '.$_tohopxt->code. ' khỏi cơ sở dữ liệu.');
+        Session::flash('success-tohopxt', 'Đã xóa tổ hợp xét tuyển "'.$_tohopxt->code. '" khỏi cơ sở dữ liệu.');
         $_tohopxt->delete();
         return redirect(route('tohopxt.index'));
     }

@@ -43,6 +43,12 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('admin.nganhxt.*', function ($view) {
             $view->with(['flag'=>'nganhxt', 'url_add_new' => route('nganhxt.create'), 'url_list' => route('nganhxt.index')]);
         });
+        View::composer('admin.lienthong.*', function ($view) {
+            $view->with(['flag'=>'lienthong', 'url_add_new' => route('lienthong.create'), 'url_list' => route('lienthong.index')]);
+        });
+        View::composer('admin.capnhat.*', function ($view) {
+            $view->with(['flag'=>'capnhat', 'url_add_new' => route('capnhat.create'), 'url_list' => route('capnhat.index')]);
+        });
         View::composer('admin.bang-tin', function ($view) {
             $view->with('flag', 'bangtin');
         });

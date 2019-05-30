@@ -22,6 +22,7 @@ Thay đổi trường : {{$truong->name}}
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-truong'))
     <div class="alert alert-danger">
         <strong>{{session('error-truong')}}</strong>

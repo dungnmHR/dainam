@@ -43,7 +43,7 @@ class DoitacController extends Controller
     {
         //
         Doitac::create($request->all());
-        Session::flash('success-doitac', 'Tạo mới đối tác '.$request->name.' thành công.');
+        Session::flash('success-doitac', 'Tạo mới đối tác "'.$request->name.'" thành công.');
         return redirect(route('doitac.create'));
     }
 
@@ -110,7 +110,7 @@ class DoitacController extends Controller
             Session::flash('error-doitac', 'Không tìm thấy đối tác cần xóa.');
             return redirect(route('doitac.index'));
         }
-        Session::flash('success-doitac', 'Đã xóa đối tác : '.$_doitac->name. ' khỏi cơ sở dữ liệu.');
+        Session::flash('success-doitac', 'Đã xóa đối tác "'.$_doitac->name. '" khỏi cơ sở dữ liệu.');
         $_doitac->delete();
         return redirect(route('doitac.index'));
 

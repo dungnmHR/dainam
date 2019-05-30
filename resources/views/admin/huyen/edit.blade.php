@@ -22,6 +22,7 @@ Thay đổi quận\huyện : {{$huyen->name}}
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-huyen'))
     <div class="alert alert-danger">
         <strong>{{session('error-huyen')}}</strong>

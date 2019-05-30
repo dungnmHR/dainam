@@ -46,7 +46,7 @@ class TinhController extends Controller
     {
         //
         Tinh::create($request->all());
-        Session::flash('success-tinh', 'Tạo mới tỉnh '.$request->name.' thành công.');
+        Session::flash('success-tinh', 'Tạo mới tỉnh "'.$request->name.'" thành công.');
         return redirect(route('tinh.create'));
 
     }
@@ -113,7 +113,7 @@ class TinhController extends Controller
             Session::flash('error-tinh', 'Không tìm thấy tỉnh thành cần sửa.');
             return redirect(route('tinh.index'));
         }
-        Session::flash('success-tinh', 'Đã xóa tỉnh : '.$_tinh->name. ' khỏi cơ sở dữ liệu.');
+        Session::flash('success-tinh', 'Đã xóa tỉnh "'.$_tinh->name. '" khỏi cơ sở dữ liệu.');
         $_tinh->delete();
         return redirect(route('tinh.index'));
 

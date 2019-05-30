@@ -22,6 +22,7 @@ Thay đổi thông tin: Tổ hợp xét tuyển
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-tohopxt'))
     <div class="alert alert-danger">
         <strong>{{session('error-tohopxt')}}</strong>

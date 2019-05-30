@@ -10,8 +10,5 @@ $(document).ready(function(){
 		action = $(this).data('action');
 		$('#importModal').find('#modal-form-import').attr('action', action);
 		$('#importModal').modal('show');
-
-		// $('#deleteModal').find('#modal-form-delete').attr('action', action);
-		// $('#deleteModal').modal('show');
 	});
 });

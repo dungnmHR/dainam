@@ -22,6 +22,7 @@ Thay đổi tỉnh : {{$tinh->name}}
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-tinh'))
     <div class="alert alert-danger">
         <strong>{{session('error-tinh')}}</strong>

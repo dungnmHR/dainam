@@ -22,6 +22,7 @@ Thêm mới đối tác
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-doitac'))
 	<div class="alert alert-danger">
 		<strong>{{session('error-doitac')}}</strong>
@@ -50,19 +51,19 @@ Thêm mới đối tác
                 @csrf
                     <div class="form-group">
 	                      <label for="name">Tên đối tác</label>
-	                      <input class="form-control" name="name" id="name" type="text" placeholder="Nguyễn Văn A" required>
+	                      <input class="form-control" value="{{old('name')}}" name="name" id="name" type="text" placeholder="Nguyễn Văn A" required>
                     </div>
 
                     <div class="form-group">
 	                      <label for="job">Chức vụ</label>
-	                      <input class="form-control" name="job" id="job" type="text" placeholder="Gv Khoa B" required>
+	                      <input class="form-control" value="{{old('job')}}" name="job" id="job" type="text" placeholder="Gv Khoa B" required>
                     </div>
 
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status" required>
-	                        <option value="1">Sử dụng</option>
-	                        <option value="0">Không sử dụng</option>
+	                        <option value="1" {{old('status') == 1 ? 'selected' : ''}}>Sử dụng</option>
+	                        <option value="0" {{old('status') == 0 ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>
                     </div>
                     <div class="form-group">

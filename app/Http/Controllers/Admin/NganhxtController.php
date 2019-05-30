@@ -45,7 +45,7 @@ class NganhxtController extends Controller
     {
         //
         Nganhxt::create($request->all());
-        Session::flash('success-nganhxt', 'Tạo mới ngành xét tuyển '.$request->name.' thành công.');
+        Session::flash('success-nganhxt', 'Tạo mới ngành xét tuyển "'.$request->name.'" thành công.');
         return redirect(route('nganhxt.create'));
     }
 
@@ -113,7 +113,7 @@ class NganhxtController extends Controller
             Session::flash('error-nganhxt', 'Không tìm thấy ngành xét tuyển cần sửa.');
             return redirect(route('nganhxt.index'));
         }
-        Session::flash('success-nganhxt', 'Đã xóa ngành xét tuyển : '.$_nganhxt->code. ' khỏi cơ sở dữ liệu.');
+        Session::flash('success-nganhxt', 'Đã xóa ngành xét tuyển "'.$_nganhxt->code. '" khỏi cơ sở dữ liệu.');
         $_nganhxt->delete();
         return redirect(route('nganhxt.index'));
     }

@@ -22,6 +22,7 @@ Thêm mới : Tỉnh
 </div>
 
 <!-- MESSAGE PAGE -->
+@include('admin.partials.error-list')
 @if(session('error-tinh'))
 	<div class="alert alert-danger">
 		<strong>{{session('error-tinh')}}</strong>
@@ -55,17 +56,17 @@ Thêm mới : Tỉnh
                 @csrf
                     <div class="form-group">
                           <label for="name">Mã tỉnh</label>
-                          <input class="form-control" name="code" id="code" type="text" placeholder="HN"  required>
+                          <input class="form-control" value="{{old('code')}}" name="code" id="code" type="text" placeholder="HN"  required>
                     </div>
                     <div class="form-group">
 	                      <label for="name">Tên tỉnh</label>
-	                      <input class="form-control" name="name" id="name" type="text" placeholder="Hà Nội"  required>
+	                      <input class="form-control" value="{{old('name')}}" name="name" id="name" type="text" placeholder="Hà Nội"  required>
                     </div>
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status" required>
-	                        <option value="1">Sử dụng</option>
-	                        <option value="0">Không sử dụng</option>
+	                        <option value="1" {{old('status') == 1 ? 'selected' : ''}}>Sử dụng</option>
+	                        <option value="0" {{old('status') == 0 ? 'selected' : ''}}>Không sử dụng</option>
 	                     </select>
                     </div>
                     <div class="form-group">

@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('title')
-Thêm mới: Tổ hợp xét tuyển
+Thêm mới : Loại hình liên thông
 @parent
 @stop
 
@@ -15,7 +15,7 @@ Thêm mới: Tổ hợp xét tuyển
   <div class="card-body">
     <div class="row">
       <div class="col-lg-8">
-        <h3 class="mb-0">Thêm mới: Tổ hợp xét tuyển</h3>
+        <h3 class="mb-0">Thêm mới : Loại hình liên thông</h3>
       </div>
     </div>
   </div>
@@ -23,14 +23,14 @@ Thêm mới: Tổ hợp xét tuyển
 
 <!-- MESSAGE PAGE -->
 @include('admin.partials.error-list')
-@if(session('error-tohopxt'))
+@if(session('error-lienthong'))
 	<div class="alert alert-danger">
-		<strong>{{session('error-tohopxt')}}</strong>
+		<strong>{{session('error-lienthong')}}</strong>
 	</div>
 @endif
-@if(session('success-tohopxt'))
+@if(session('success-lienthong'))
 	<div class="alert alert-success">
-		<strong>{{session('success-tohopxt')}}</strong>
+		<strong>{{session('success-lienthong')}}</strong>
 	</div>
 @endif
 
@@ -46,19 +46,20 @@ Thêm mới: Tổ hợp xét tuyển
     <div class="card-body bg-light">
         <div class="row">
             <div class="col-4">
-                <form id="form" class="form-horizontal" role="form" action="{{route('tohopxt.store')}}" 
+                <form id="form" class="form-horizontal" role="form" action="{{route('lienthong.store')}}" 
                 enctype="multipart/form-data" method="POST">
                 @csrf
                     <div class="form-group">
-	                      <label for="name">Mã</label>
-	                      <input class="form-control" value="{{old('code')}}" name="code" id="code" type="text" placeholder="A00" required>
+                          <label for="name">Tên</label>
+                          <input class="form-control" value="{{old('name')}}" name="name" id="name" type="text" placeholder="Dược học"  required>
                     </div>
-
                     <div class="form-group">
-	                      <label for="job">Nội dung</label>
-	                      <input class="form-control" value="{{old('content')}}" name="content" id="content" type="text" placeholder="Toán-Lý-Hóa" required>
-                    </div>
-
+                        <label for="status">Loại hình</label>
+                        <select class="form-control" id="type" name="type" required>
+                            <option value="1" {{old('type') == 1 ? 'selected' : ''}}>Ngành liên thông</option>
+                            <option value="2" {{old('type') == 2 ? 'selected' : ''}}>Hệ liên thông</option>
+                         </select>
+                    </div>                   
                     <div class="form-group">
 	                    <label for="status">Trạng thái</label>
 	                    <select class="form-control" id="status" name="status" required>
@@ -72,7 +73,8 @@ Thêm mới: Tổ hợp xét tuyển
                 	</div>
                 </form>
             </div>
-        </div> 
+        </div>
+  
     </div>
 </div>
 <!-- END FORM -->

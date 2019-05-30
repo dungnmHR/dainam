@@ -27,8 +27,8 @@
         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-wrench"></span></span><span>Cấu hình CRM</span>
         </div>
       </a>
-      <ul class="nav collapse {{$flag == 'doitac' || $flag == 'tinh' 
-                || $flag == 'huyen' || $flag == 'truong' 
+      <ul class="nav collapse {{$flag == 'doitac' || $flag == 'tinh' || $flag == 'lienthong'
+                || $flag == 'huyen' || $flag == 'truong' || $flag == 'capnhat'
                 || $flag == 'tohopxt' || $flag == 'nganhxt' ? 'show' : ''}}" id="setting-crm">
         <li class="nav-item"><a class="nav-link" href="#">Cấu hình bộ lọc</a>
         </li>
@@ -47,9 +47,9 @@
         </li>       
         <li class="nav-item {{$flag == 'nganhxt' ? 'active' : ''}}"><a class="nav-link" href="{{route('nganhxt.index')}}">Cấu hình ngành xét tuyển</a>
         </li>      
-        <li class="nav-item"><a class="nav-link" href="#">Cấu hình loại hình đăng kí cập nhật</a>
+        <li class="nav-item {{$flag == 'capnhat' ? 'active' : ''}}""><a class="nav-link" href="{{route('capnhat.index')}}">Cấu hình loại hình đăng kí cập nhật</a>
         </li>
-         <li class="nav-item"><a class="nav-link" href="#">Cấu hình ngành liên thông</a>
+         <li class="nav-item {{$flag == 'lienthong' ? 'active' : ''}}"><a class="nav-link" href="{{route('lienthong.index')}}">Cấu hình liên thông</a>
         </li>
         <hr class="border-300 my-2" />
         <li class="nav-item"><a class="nav-link" href="#">Cấu hình email</a>

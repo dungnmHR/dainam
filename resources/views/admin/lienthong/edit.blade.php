@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('title')
-Thay đổi thông tin: Ngành xét tuyển
+Thay đổi dữ liệu : {{$lienthong->name}}
 @parent
 @stop
 
@@ -15,7 +15,7 @@ Thay đổi thông tin: Ngành xét tuyển
   <div class="card-body">
     <div class="row">
       <div class="col-lg-8">
-        <h3 class="mb-0">Thay đổi thông tin: Ngành xét tuyển</h3>
+        <h3 class="mb-0">Thay đổi dữ liệu : {{$lienthong->name}}</h3>
       </div>
     </div>
   </div>
@@ -23,16 +23,17 @@ Thay đổi thông tin: Ngành xét tuyển
 
 <!-- MESSAGE PAGE -->
 @include('admin.partials.error-list')
-@if(session('error-nganhxt'))
+@if(session('error-lienthong'))
     <div class="alert alert-danger">
-        <strong>{{session('error-nganhxt')}}</strong>
+        <strong>{{session('error-lienthong')}}</strong>
     </div>
 @endif
-@if(session('success-nganhxt'))
+@if(session('success-lienthong'))
     <div class="alert alert-success">
-        <strong>{{session('success-nganhxt')}}</strong>
+        <strong>{{session('success-lienthong')}}</strong>
     </div>
 @endif
+
 <!-- FORM -->
 <div class="card mb-3">
     <div class="card-header">
@@ -45,33 +46,26 @@ Thay đổi thông tin: Ngành xét tuyển
     <div class="card-body bg-light">
         <div class="row">
             <div class="col-4">
-                <form id="form" class="form-horizontal" role="form" method="post" action="{{route('nganhxt.update',['id'=>$nganhxt->id])}}">
+                <form id="form" class="form-horizontal" role="form" method="post" action="{{route('lienthong.update',['id'=>$lienthong->id])}}">
                 @method('PATCH')
                 @csrf
-                   <div class="form-group">
-                          <label for="name">Mã ngành</label>
-                          <input class="form-control" name="code" id="code" type="text" value="{{$nganhxt->code}}" required>
-                    </div>
-
+                    <input class="form-control" name="_id" id="_id" type="hidden" value="{{$lienthong->id}}">
                     <div class="form-group">
-                          <label for="job">Tên ngành</label>
-                          <input class="form-control" name="name" id="name" type="text" value="{{$nganhxt->name}}"  required>
+                          <label for="name">Tên</label>
+                          <input class="form-control" value="{{$lienthong->name}}" name="name" id="name" type="text" placeholder="Dược học"  required>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="status">Tổ hợp xét tuyển</label>
-                        <select class="form-control" id="tohopxt_id" name="tohopxt_id" required>
-                           @foreach($tohopxts as $tohopxt)
-                           <option value={{$tohopxt->id}} {{$nganhxt->tohopxt_id == $tohopxt->id ? 'selected' : ''}}>
-                            {{$tohopxt->code}}( {{$tohopxt->content}} )</option>
-                           @endforeach
+                        <label for="status">Loại hình</label>
+                        <select class="form-control" id="type" name="type" required>
+                            <option value="1" {{$lienthong->type == 1 ? 'selected' : ''}}>Ngành liên thông</option>
+                            <option value="2" {{$lienthong->type == 2 ? 'selected' : ''}}>Hệ liên thông</option>
                          </select>
-                    </div>
+                    </div>                   
                     <div class="form-group">
                         <label for="status">Trạng thái</label>
                         <select class="form-control" id="status" name="status" required>
-                            <option value="1" {{$nganhxt->status == 1 ? 'selected' : ''}}>Sử dụng</option>
-                            <option value="0" {{$nganhxt->status == 0 ? 'selected' : ''>Không sử dụng</option>
+                            <option value="1" {{$lienthong->status == 1 ? 'selected' : ''}}>Sử dụng</option>
+                            <option value="0" {{$lienthong->status == 0 ? 'selected' : ''}}>Không sử dụng</option>
                          </select>
                     </div>
                     <div class="form-group">
