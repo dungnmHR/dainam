@@ -159,7 +159,7 @@ class TinhController extends Controller
 
     public function getDiaChi(Request $request)
     {
-        $dia_chi = "Tổ 5, Thị Trấn Mù Cang Chải, Huyện Mù Cang Chải, yên bái";//$request->input('query');
+        $dia_chi = $request->input('query');
         $_tmp_array = explode(",",mb_strtolower($dia_chi, 'UTF-8'));
 
         $_city = "";

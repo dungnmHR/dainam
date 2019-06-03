@@ -10,7 +10,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/search-huyen/autocomplete','\App\Http\Controllers\Admin\HuyenController@autocomplete')->name('huyen-autocomplete');
     Route::get('/get-code-huyen/autocomplete','\App\Http\Controllers\Admin\HuyenController@getCodeHuyen')->name('get-code-huyen-autocomplete');
     Route::get('/search-truong/autocomplete','\App\Http\Controllers\Admin\TruongController@autocomplete')->name('truong-autocomplete');
-    Route::get('/get-code-truong/autocomplete','\App\Http\Controllers\Admin\TruongController@getCodeTruong')->name('get-code-truong-autocomplete');
+    Route::get('/get-to-hop-xt/autocomplete','\App\Http\Controllers\Admin\ChinhQuyController@getTohopxt')->name('get-to-hop-xt');
+    Route::get('/get-code-truong/autocomplete','\App\Http\Controllers\Admin\TruongController@getCodeTruong')
+    ->name('get-code-truong-autocomplete');
     Route::get('/get-dia-chi/autocomplete','\App\Http\Controllers\Admin\TinhController@getDiaChi')->name('get-dia-chi-autocomplete');
 	Route::resource('huyen', '\App\Http\Controllers\Admin\HuyenController');
 	Route::post('/huyen/import', '\App\Http\Controllers\Admin\HuyenController@import')->name('huyen-import');
@@ -20,7 +22,9 @@ Route::prefix('admin')->group(function () {
 	Route::resource('nganhxt', '\App\Http\Controllers\Admin\NganhxtController');
 	Route::resource('lienthong', '\App\Http\Controllers\Admin\LienthongController');
 	Route::resource('capnhat', '\App\Http\Controllers\Admin\CapnhatController');
-
+	Route::resource('user', '\App\Http\Controllers\Admin\UserController');
+	Route::get('/download/hoc-vien-chinh-quy-template','\App\Http\Controllers\Admin\ChinhquyController@downloadTemplate')
+	->name('down-hoc-vien-chinh-quy-template');
 
 	//Route test view
 	Route::get('/bang-tin', function () {
@@ -37,9 +41,7 @@ Route::prefix('crm')->group(function () {
 	Route::get('/', function () {
     	return view('admin.crm.list');
 	})->name('crm-list');
-	Route::get('/chinh-quy', function () {
-    	return view('admin.crm.chinh-quy');
-	})->name('crm-chinh-quy');
+	Route::resource('chinh-quy', '\App\Http\Controllers\Admin\ChinhquyController');
 	Route::get('/lien-thong', function () {
     	return view('admin.crm.lien-thong');
 	})->name('crm-lien-thong');

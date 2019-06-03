@@ -41,7 +41,7 @@ class TohopxtController extends Controller
     {
         //
         Tohopxt::create($request->all());
-        Session::flash('success-tohopxt', 'Tạo mới tổ hợp xét tuyển "'.$request->name.'" thành công.');
+        Session::flash('success-tohopxt', 'Tạo mới tổ hợp xét tuyển "'.$request->code.'" thành công.');
         return redirect(route('tohopxt.create'));
     }
 

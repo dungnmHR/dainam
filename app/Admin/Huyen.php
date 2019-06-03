@@ -15,4 +15,9 @@ class Huyen extends Model
     {
         return $this->belongsTo('App\Admin\Tinh', 'tinh_id', 'code');
     }
+
+    public function hocvienchinhquies()
+    {
+        return $this->hasMany('App\Admin\Hocvienchinhquy','huyen_id', 'code');
+    }
 }

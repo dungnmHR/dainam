@@ -20,4 +20,8 @@ class Tinh extends Model
     {
         return $this->hasMany('App\Admin\Truong', 'tinh_id', 'code');
     }
+    public function hocvienchinhquies()
+    {
+        return $this->hasMany('App\Admin\Hocvienchinhquy','tinh_id', 'code');
+    }
 }

@@ -17,7 +17,7 @@
     <hr class="border-300 my-2" />
     <ul class="navbar-nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="{{route('crm-list')}}">
+        <a class="nav-link" href="{{route('chinh-quy.index')}}">
           <div class="d-flex align-items-center"><span class="nav-link-icon">
             <span class="far fa-gem"></span></span><span>Hệ thống CRM</span>
           </div>
@@ -54,14 +54,15 @@
         <hr class="border-300 my-2" />
         <li class="nav-item"><a class="nav-link" href="#">Cấu hình email</a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#">Cấu hình xuất file</a>
+        <li class="nav-item"><a class="nav-link" href="{{route('down-hoc-vien-chinh-quy-template')}}">
+        Download template file excel</a>
         </li>      
       </ul>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
+    <li class="nav-item {{$flag == 'user' ? 'active' : ''}}">
+      <a class="nav-link" href="{{route('user.index')}}">
         <div class="d-flex align-items-center">
-          <span class="nav-link-icon"><span class="fas fa-blender-phone"></span></span><span>Chăm sóc viên</span>
+          <span class="nav-link-icon"><span class="fas fa-blender-phone"></span></span><span>Tài khoản user</span>
         </div>
       </a>
     </li>

@@ -32,10 +32,15 @@ class Nganhxt extends Model
       		foreach ($_tmp_arr as $key => $value) {
       			$_tohop = Tohopxt::where('id',$value)->where('status', 1)->first();
       			if($_tohop != null){
-      				$result[$value] = $_tohop->code;
+      				$result[$value] = $_tohop->code." (".$_tohop->content.")";
       			}     			
       		}
       	}
       	return $result;
+    }
+
+    public function hocvienchinhquies()
+    {
+        return $this->hasMany('App\Admin\Hocvienchinhquy');
     }
 }

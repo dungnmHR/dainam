@@ -1,6 +1,9 @@
 <div class="top-bar navbar-top sticky-kit navbar-expand">
   <div class="col-md-12">
     <div class="cms-title">
+      <button class="add-news f-left btn trai" style="margin-top: -3px;"><a href="{{route('home-backend')}}">
+        <span class=" fas fa-home"></span> CMS Home</a>
+      </button>
       Phần mềm quản lý cơ sở dữ liệu - Đại học Đại Nam
     </div>
     <div class="cms-top-bar-center">
