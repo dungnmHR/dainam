@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        yajra\Datatables\DatatablesServiceProvider::class,
+        Yajra\DataTables\HtmlServiceProvider::class,
 
     ],
 
@@ -228,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Datatables' => yajra\Datatables\Datatables::class,
 
     ],
 

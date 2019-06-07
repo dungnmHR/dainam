@@ -17,4 +17,5 @@
     <link href="{{asset('backend/pages/assets/css/theme.css')}}" rel="stylesheet">
     <link href="{{asset('backend/pages/assets/lib/datatables-bs4/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{asset('backend/pages/assets/lib/datatables.net-responsive-bs4/responsive.bootstrap4.css')}}" rel="stylesheet">
+    <link href="{{asset('backend/pages/assets/lib/select2/select2.min.css')}}" rel="stylesheet">
 </head>

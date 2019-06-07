@@ -54,6 +54,7 @@ class CreateHocvienchinhquiesTable extends Migration
             $table->boolean('send_email')->nullable();
             $table->boolean('send_sms')->nullable();
             $table->boolean('send_giayht')->nullable();
+            $table->boolean('in_giaynh')->nullable();
             $table->integer('user_id')->nullable();
             $table->text('ghichu')->nullable();
             $table->boolean('status');

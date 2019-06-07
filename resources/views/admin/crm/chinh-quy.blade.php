@@ -231,8 +231,8 @@ Học viên chính quy
             <option value="4">Sự kiện tư vấn tuyển sinh tại trường THPT bạn theo học</option>
             <option value="5">Youtube</option>
             <option value="6">Facebook</option>
-            <option value="5">Website</option>
-            <option value="6">Tờ rơi</option>
+            <option value="7">Website</option>
+            <option value="8">Tờ rơi</option>
           </select>
         </div>
       </div>
@@ -621,7 +621,6 @@ Học viên chính quy
   });
   $('#district').change(function(){
     $.get(get_code_district, { query: $(this).val() }, function (data) {
-      console.log(data);
       $('#district_code').val(data);
     });
 

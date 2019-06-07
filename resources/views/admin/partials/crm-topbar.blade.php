@@ -1,28 +1,33 @@
 <div class="top-bar navbar-top sticky-kit navbar-expand">
   <div class="col-md-12">
     <div class="cms-title">
-      <button class="add-news f-left btn trai" style="margin-top: -3px;"><a href="{{route('home-backend')}}">
-        <span class=" fas fa-home"></span> CMS Home</a>
-      </button>
+      @if(Auth::check())
+        @if(Auth::user()->can('admin'))
+          <button class="add-news f-left btn trai" style="margin-top: -3px;"><a href="{{route('home-backend')}}">
+            <span class=" fas fa-home"></span> CMS Home</a>
+          </button>
+        @endif
+      @endif
       Phần mềm quản lý cơ sở dữ liệu - Đại học Đại Nam
     </div>
     <div class="cms-top-bar-center">
       <div class="nav-item dropdown">
         <a class="nav-link pr-0" id="navbarDropdownUser" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="topbar-c-t">Xin chào! Trương Đức Cường</span>
+          @if(Auth::check())
+            <span class="topbar-c-t">Xin chào ! {{Auth::user()->name}}</span>
+          @endif     
         </a>
-        <div class="avatar avatar-xl">
-          <img class="rounded-circle" src="{{asset('backend/pages/assets/img/team/3.jpg')}}" alt="">
-        </div>
         <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdownUser">
           <div class="bg-white rounded-soft py-2">
-            <a class="dropdown-item" href="#!">Set status</a>
+           
             <a class="dropdown-item" href="pages/profile.html">Profile &amp; account</a>
-            <a class="dropdown-item" href="#!">Feedback</a>
-
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="pages/settings.html">Settings</a>
-            <a class="dropdown-item" href="authentication/log-out.html">Logout</a>
+          
+            <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>Đăng xuất
+            </a>
           </div>
         </div>
       </div>

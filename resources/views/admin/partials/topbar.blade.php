@@ -87,16 +87,13 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdownUser">
         <div class="bg-white rounded-soft py-2">
-          <a class="dropdown-item font-weight-bold text-warning" href="#!"><span class="fas fa-crown mr-1"></span><span>Go Pro</span></a>
-
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#!">Set status</a>
+       
           <a class="dropdown-item" href="pages/profile.html">Profile &amp; account</a>
-          <a class="dropdown-item" href="#!">Feedback</a>
-
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="pages/settings.html">Settings</a>
-          <a class="dropdown-item" href="authentication/log-out.html">Logout</a>
+          <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>Đăng xuất</a>
         </div>
       </div>
     </li>

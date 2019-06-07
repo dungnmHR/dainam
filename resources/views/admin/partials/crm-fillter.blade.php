@@ -6,10 +6,9 @@
     <input class="w1" type="text" name="cmnd" id="f_cmt" placeholder="Chứng minh thư" value="">
     <select class="chon-nganh" id="f_nganhxt">
       <option value="all" selected>Tất cả các ngành</option>
-      <option value="ketoan">Kế toán</option>
-      <option value="cntt">CNTT & TT</option>
-      <option value="supham">Sư phạm</option>
-      <option value="congtrinh">Công trình</option>
+      @foreach($nganhxts as $nganhxt)
+        <option value="{{$nganhxt->code}}">{{$nganhxt->name}}</option>
+      @endforeach
     </select>
   </form>
 </div>

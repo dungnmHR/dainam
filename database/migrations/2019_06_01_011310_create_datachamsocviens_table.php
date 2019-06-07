@@ -21,6 +21,7 @@ class CreateDatachamsocviensTable extends Migration
             $table->integer('chamsocvien_id');
             $table->string('ttdata')->nullable();
             $table->integer('langoi')->nullable();
+            $table->integer('type')->nullable(); //1:chinh quy ; 2: lien thong; 3: cap nhat duoc
             $table->text('noidung')->nullable();
             $table->boolean('status');
             $table->timestamps();

@@ -1,132 +1,195 @@
-<section id="table-hv">
-    <div class="title-table">
-        <span>Đã chọn: <span class="count-tick">12</span></span>
-    </div>
-    <div class="card-data thongtin-hocvien">
-      <table id="info-table" class="table table-bordered table-sm table-dashboard">
-        <thead>
-          <tr>
-            <th><input type="checkbox" name=""></th>
-            <th>Mã thí sinh</th>
-            <th>Ngày đăng ký</th>
-            <th>Họ và tên</th>
-            <th>Ngày sinh</th>
-            <th>Giới tính</th>
-            <th>Điện thoại</th>
-            <th>CMTND</th>
-            <th>Ngành xét tuyển</th>
-            <th>Tổ hợp xét tuyển</th>
-            <th>Gửi SMS</th>
-            <th>Gửi email</th>
-            <th>In giấy HT</th>
-            <th>In giấy NH</th>
-            <th>Lần gọi</th>
-            <th>Ghi chú</th>
-            <th>Hẹn gọi lại</th>
-            <th>Ngày gọi</th>
 
-            <th>Dân tộc</th>
-            <th>Nơi sinh</th>
-            <th>Khu vực ưu tiên</th>
-            <th>Đối tượng ưu tiên</th>
-            <th>Địa chỉ</th>
-            <th>Tỉnh/Tp</th>
-            <th>Quận/Huyện</th>
-            <th>Xã/Phường</th>
-
-            <th>Điện thoại GĐ</th>
-            <th>Email</th>
-            <th>Đối tác</th>
-            <th>Facebook</th>
-
-            <th>Năm TS</th>
-            <th>TT nhập học</th>
-            <th>Mã phiếu báo điểm</th>
-            <th>Mã giấy nhập học</th>
-            <th>Ngày in giấy nhập học</th>
-
-            <th>Điểm môn 1</th>
-            <th>Điểm môn 2</th>
-            <th>Điểm môn 3</th>
-            <th>Tổng điểm</th>
-            <th>Trường THPT</th>
-            <th>Đơn xét tuyển</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($hocviens as $hocvien)
-        <tr>
-            <td><input type="checkbox" name=""></td>
-            <td>{{$hocvien->mahv}}</td>
-            <td>{{$hocvien->ngaydk}}</td>
-            <td>{{$hocvien->ten}}</td>
-            <td>{{$hocvien->ngaysinh}}</td>
-            <td>{{$hocvien->gioitinh}}</td>
-            <td>{{$hocvien->sdt}}</td>
-            <td>{{$hocvien->cmt}}</td>
-            <td>{{$hocvien->nganhxt_id}}</td>
-            <td>{{$hocvien->thxettuyen}}</td>
-            <td><input type="checkbox" name=""></td>
-            <td><input type="checkbox" name=""></td>
-            <td><input type="checkbox" name=""></td>
-            <td><input type="checkbox" name=""></td>
-            <td>Lần gọi</td>
-            <td>Ghi chú</td>
-            <td>Hẹn gọi lại</td>
-            <td>Ngày gọi</td>
-
-            <td>{{$hocvien->dantoc}}</td>
-            <td>{{$hocvien->noisinh}}</td>
-            <td>{{$hocvien->khuvucut}}</td>
-            <td>{{$hocvien->doituongut}}</td>
-
-            <td>{{$hocvien->diachi}}</td>
-            <td>{{$hocvien->tinh_id}}</td>
-            <td>{{$hocvien->huyen_id}}</td>
-            <td>{{$hocvien->xa}}</td>
-
-            <td>{{$hocvien->sdt_2}}</td>
-            <td>{{$hocvien->email}}</td>
-            <td>{{$hocvien->doitac_id}}</td>
-            <td>{{$hocvien->fb}}</td>
-
-            <td>{{$hocvien->nam}}</td>
-            <td>{{$hocvien->ttnhaphoc}}</td>
-            <td>{{$hocvien->mapbd}}</td>
-            <td>{{$hocvien->magnh}}</td>
-            <td>{{$hocvien->ngaygnh}}</td>
-
-            <td>{{$hocvien->diem_1}}</td>
-            <td>{{$hocvien->diem_2}}</td>
-            <td>{{$hocvien->diem_3}}</td>
-            <td>{{$hocvien->tongdiem}}</td>
-            <td>{{$hocvien->truong_id}}</td>
-            <td>{{$hocvien->donxt}}</td>
-        </tr>
+<thead>
+    <tr>
+        <th width="50px"><input type="checkbox" id="master"></th>
+        <!-- các cột mặc định -->
+        @foreach($info_tables as $_cl)       
+        <th>{{$_cl->name}}</th>       
         @endforeach
+    </tr>
+</thead>
+<tbody>
+    @foreach($hocviens as $hocvien)
+    <tr>
+        <td><input type="checkbox" class="sub_chk" data-id="{{$hocvien->id}}"></td>
+        <!-- các cột mặc định -->
+        @foreach($info_tables as $_cl)            
+            @switch($_cl->code)
+                @case("nganhxt_id")
+                    <td>{{$hocvien->nganhxt->name}}</td>
+                    @break
+                @case("thxettuyen")
+                    <td>{{$hocvien->tohopxt()->first()->code}}({{$hocvien->tohopxt()->first()->content}})</td>
+                    @break
+                @case("gioitinh")
+                    @if($hocvien->toArray()[$_cl->code] == 1)
+                        <td>Nam</td>
+                        @else
+                        <td>Nữ</td>
+                    @endif        
+                    @break
+                @case("send_email")
+                    <td><input type="checkbox" name="send_email[]" disabled
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("send_sms")
+                    <td><input type="checkbox" name="send_sms[]" disabled 
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("send_giayht")
+                    <td><input type="checkbox" name="send_giayht[]" disabled 
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("in_giaynh")
+                    <td><input type="checkbox" name="in_giaynh[]" disabled
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("ttnhaphoc")
+                    <td><input type="checkbox" name="ttnhaphoc[]" disabled
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("donxt")
+                    <td><input type="checkbox" name="donxt[]" disabled
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("hocba")
+                    <td><input type="checkbox" name="hocba[]" disabled
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("bangcntt")
+                    <td><input type="checkbox" name="bangcntt[]" disabled
+                        {{$hocvien->toArray()[$_cl->code] == 1 ? 'checked' : '' }} >
+                    </td>
+                    @break
+                @case("noisinh")
+                    <td>{{$hocvien->name_noisinh}}</td>
+                    @break
 
+                @case("tinh_id")
+                    <td>{{$hocvien->tinh()->first()->name}}</td>
+                    @break
 
-    </tbody>
-   <!--  <tr class="total-action">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>20</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>20</td>
-        <td>20</td>
-        <td>20</td>
-        <td></td>
-        <td>20</td>
-        <td>20</td>
-        <td></td>
-    </tr> -->
-</table>
-</div>
+                @case("huyen_id")
+                    <td>{{$hocvien->huyen()->first()->name}}</td>
+                    @break
 
-</section>
+                @case("truong_id")
+                    <td>{{$hocvien->truong()->first()->name}}</td>
+                    @break
+
+                @case("doitac_id")
+                    <td>{{$hocvien->doitac()->first()->name}}</td>
+                    @break
+
+                @case("ptxettuyen")
+                    @switch($hocvien->toArray()[$_cl->code])
+                        @case(1)
+                            <td>Xét học bạ</td>
+                            @break
+                        @case(2)
+                            <td>Điểm thi THPT QG</td>
+                            @break
+                        @case(3)
+                            <td>Cả 2 phương thức</td>
+                            @break
+                        @default
+                            <td></td>                         
+                    @endswitch    
+                    @break
+
+                @case("nguontt_id")
+                    @switch($hocvien->toArray()[$_cl->code])
+                        @case(0)
+                            <td>Truyền hình</td>
+                            @break
+                        @case(1)
+                            <td>Báo chí</td>
+                            @break
+                        @case(2)
+                            <td>Ngày hội Tuyển sinh</td>
+                            @break
+                        @case(3)
+                            <td>Sự kiện tư vấn tuyển sinh tại trường THPT bạn theo học</td>
+                            @break
+                        @case(4)
+                            <td>Youtube</td>
+                            @break
+                        @case(5)
+                            <td>Facebook</td>
+                            @break
+                        @case(6)
+                            <td>Website</td>
+                            @break
+                        @case(7)
+                            <td>Tờ rơi</td>
+                            @break
+                        @default
+                            <td></td>                         
+                    @endswitch    
+                    @break
+                @case("langoi")
+                    @if($hocvien->data_chamsocvien != null)
+                        <td>{{$hocvien->data_chamsocvien->langoi}}</td>
+                    @else
+                    <td></td> 
+                    @endif
+                    @break
+                @case("ngaygoi")
+                    @if($hocvien->data_chamsocvien != null)
+                        <td>{{$hocvien->data_chamsocvien->ngaygoi}}</td>
+                    @else
+                    <td></td> 
+                    @endif
+                    @break
+                @case("ngaygoilai")
+                    @if($hocvien->data_chamsocvien != null)
+                        <td>{{$hocvien->data_chamsocvien->ngaygoilai}}</td>
+                    @else
+                    <td></td> 
+                    @endif
+                    @break
+                @case("noidung")
+                    @if($hocvien->data_chamsocvien != null)
+                        <td>{{$hocvien->data_chamsocvien->noidung}}</td>
+                    @else
+                    <td></td> 
+                    @endif
+                    @break
+                @case("chamsocvien_id")
+                    @if($hocvien->data_chamsocvien != null && count($hocvien->data_chamsocvien->user()->get()) > 0)
+                        <td>{{$hocvien->data_chamsocvien->user()->first()->name}}</td>
+                    @else
+                    <td></td> 
+                    @endif
+                    @break
+                @case("ttdata")
+                    @if($hocvien->data_chamsocvien != null)
+                        <td>{{$hocvien->data_chamsocvien->ttdata}}</td>
+                    @else
+                    <td></td> 
+                    @endif
+                    @break
+
+                @default
+                <td>{{$hocvien->toArray()[$_cl->code]}}</td>
+                @php
+                @endphp
+            @endswitch
+        @endforeach
+    </tr>
+    @endforeach
+</tbody>   
+<tr class="total-action">
+    <td></td>
+    <!-- các cột mặc định -->
+    @foreach($info_tables as $_cl)
+        <td>{{$_cl->option_sum != null ? '20' : ''}}</td>
+    @endforeach
+</tr>
